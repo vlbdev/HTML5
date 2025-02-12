@@ -8,11 +8,12 @@
       form {
         display: flex;
         flex-direction: column;
+        max-width: 250px;
       }
     </style>
   </head>
   <body>
-    <form id="form1" action="" novalidate>
+    <form id="form1" action="" validate>
       <input
         autofocus
         form="form1"
@@ -22,9 +23,12 @@
         id=""
         list="datal"
       />
+      <input type="number" min="5" name="num" id="" required />
+      <button type="submit">send</button>
       <datalist id="datal">
         <option value="11">1</option>
       </datalist>
+      <input type="text" pattern="[0-9]" required placeholder="85" />
     </form>
   </body>
 </html>
