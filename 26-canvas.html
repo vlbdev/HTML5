@@ -34,6 +34,11 @@
       ctx.font = "60px Arial";
       ctx.fillText("Hello", 250, 140);
       ctx.stroke();
+      const grad = ctx.createLinearGradient(100, 10, 300, 0);
+      grad.addColorStop(0, "red");
+      grad.addColorStop(1, "green");
+      ctx.fillStyle = grad;
+      ctx.fillRect(10, 220, 400, 100);
     </script>
   </body>
 </html>
