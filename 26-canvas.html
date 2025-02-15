@@ -11,9 +11,27 @@
     </style>
   </head>
   <body>
-    <canvas width="600" height="300"></canvas>
+    <canvas class="canvas" width="600" height="300"></canvas>
+
+    <img
+      id="scream"
+      src="https://www.w3schools.com/html/img_the_scream.jpg"
+      alt="The Scream"
+      width="220"
+      height="277"
+    />
+
+    <canvas
+      id="myCanvas"
+      width="250"
+      height="300"
+      style="border: 1px solid #d3d3d3"
+    >
+      Your browser does not support the HTML canvas tag.</canvas
+    >
+    <button type="button">Img</button>
     <script>
-      const canvas = document.querySelector("canvas");
+      const canvas = document.querySelector(".canvas");
       const ctx = canvas.getContext("2d");
       ctx.fillStyle = "#4ff";
       ctx.fillRect(0, 0, 200, 60);
@@ -39,6 +57,23 @@
       grad.addColorStop(1, "green");
       ctx.fillStyle = grad;
       ctx.fillRect(10, 220, 400, 100);
+
+      const cgrad = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+      cgrad.addColorStop(0, "red");
+      cgrad.addColorStop(1, "green");
+      ctx.fillStyle = cgrad;
+      ctx.fillRect(100, 20, 200, 100);
+
+      const btn = document.querySelector("button");
+
+      btn.addEventListener("click", insertImg);
+
+      function insertImg() {
+        const imgCanvas = document.querySelector("#myCanvas");
+        const cont = imgCanvas.getContext("2d");
+        const img = document.querySelector("img");
+        cont.drawImage(img, 10, 10);
+      }
     </script>
   </body>
 </html>
