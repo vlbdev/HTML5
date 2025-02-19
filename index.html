@@ -6,6 +6,9 @@
     <title>Document</title>
     <base href="https://www.w3schools.com/tags/" />
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body > div {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -15,9 +18,39 @@
         justify-content: center;
         align-items: center;
       }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
       td,
       th {
-        padding: 0 10px 5px 0;
+        padding: 15px 0;
+        border: 1px solid beige;
+        vertical-align: top;
+        min-height: 80px;
+      }
+
+      td:first-child a {
+        position: sticky;
+        top: 0;
+        padding: 10px;
+        background-color: bisque;
+      }
+      .deprecated {
+        color: red;
+        font-weight: bold;
+      }
+      dl {
+        display: grid;
+        grid-template-columns: 150px 1fr;
+      }
+      dt,
+      dd {
+        border-bottom: 3px solid bisque;
+        margin: 0;
+      }
+      dt {
+        border-right: 3px solid bisque;
       }
     </style>
   </head>
@@ -28,28 +61,484 @@
     <table class="ws-table-all notranslate">
       <tbody>
         <tr>
-          <th style="width: 25%">Tag</th>
-          <th>Description</th>
+          <th style="width: 180px">Tag</th>
+          <th style="width: 300px">Description</th>
+          <th>Attributes</th>
         </tr>
         <tr>
           <td><a href="tag_comment.asp">&lt;!--...--&gt;</a></td>
           <td>Defines a comment</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_doctype.asp">&lt;!DOCTYPE&gt;</a>&nbsp;</td>
           <td>Defines the document type</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_a.asp">&lt;a&gt;</a></td>
           <td>Defines a hyperlink</td>
+          <td>
+            <dl>
+              <dt id="attributionsrc">
+                <a href="#attributionsrc"
+                  ><code>attributionsrc</code>
+                  <abbr
+                    class="icon icon-experimental"
+                    title="Experimental. Expect behavior to change in the future."
+                  >
+                    <span class="visually-hidden">Experimental</span>
+                  </abbr></a
+                >
+              </dt>
+              <dd>
+                <p>
+                  Specifies that you want the browser to send an
+                  <a
+                    href="/en-US/docs/Web/HTTP/Headers/Attribution-Reporting-Eligible"
+                    ><code>Attribution-Reporting-Eligible</code></a
+                  >
+                  header. On the server-side this is used to trigger sending an
+                  <a
+                    href="/en-US/docs/Web/HTTP/Headers/Attribution-Reporting-Register-Source"
+                    ><code>Attribution-Reporting-Register-Source</code></a
+                  >
+                  header in the response, to register a
+                  <a
+                    href="/en-US/docs/Web/API/Attribution_Reporting_API/Registering_sources#navigation-based_attribution_sources"
+                    >navigation-based attribution source</a
+                  >.
+                </p>
+                <p>
+                  The browser stores the source data associated with the
+                  navigation-based attribution source (as provided in the
+                  <a
+                    href="/en-US/docs/Web/HTTP/Headers/Attribution-Reporting-Register-Source"
+                    ><code>Attribution-Reporting-Register-Source</code></a
+                  >
+                  response header) when the user clicks the link. See the
+                  <a href="/en-US/docs/Web/API/Attribution_Reporting_API"
+                    >Attribution Reporting API</a
+                  >
+                  for more details.
+                </p>
+                <p>
+                  There are two versions of this attribute that you can set:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Boolean, i.e. just the <code>attributionsrc</code> name.
+                      This specifies that you want the
+                      <a
+                        href="/en-US/docs/Web/HTTP/Headers/Attribution-Reporting-Eligible"
+                        ><code>Attribution-Reporting-Eligible</code></a
+                      >
+                      header sent to the same server as the
+                      <code>href</code> attribute points to. This is fine when
+                      you are handling the attribution source registration on
+                      the same server.
+                    </p>
+                  </li>
+                  <li>
+                    <p>Value containing one or more URLs, for example:</p>
+                    <div class="code-example">
+                      <div class="example-header">
+                        <span class="language-name">html</span
+                        ><button type="button" class="icon copy-icon">
+                          <span class="visually-hidden"
+                            >Copy to Clipboard</span
+                          ></button
+                        ><span
+                          class="copy-icon-message visually-hidden"
+                          role="alert"
+                        ></span>
+                      </div>
+                      <pre
+                        class="brush: html notranslate"
+                      ><code>attributionsrc="https://a.example/register-source
+https://b.example/register-source"
+</code></pre>
+                    </div>
+                    <p>
+                      This is useful in cases where the requested resource is
+                      not on a server you control, or you just want to handle
+                      registering the attribution source on a different server.
+                      In this case, you can specify one or more URLs as the
+                      value of <code>attributionsrc</code>. When the resource
+                      request occurs, the
+                      <a
+                        href="/en-US/docs/Web/HTTP/Headers/Attribution-Reporting-Eligible"
+                        ><code>Attribution-Reporting-Eligible</code></a
+                      >
+                      header will be sent to the URL(s) specified in
+                      <code>attributionsrc</code> in addition to the resource
+                      origin. These URLs can then respond with the
+                      <a
+                        href="/en-US/docs/Web/HTTP/Headers/Attribution-Reporting-Register-Source"
+                        ><code>Attribution-Reporting-Register-Source</code></a
+                      >
+                      to complete registration.
+                    </p>
+                    <div class="notecard note">
+                      <p>
+                        <strong>Note:</strong> Specifying multiple URLs means
+                        that multiple attribution sources can be registered on
+                        the same feature. You might for example have different
+                        campaigns that you are trying to measure the success of,
+                        which involve generating different reports on different
+                        data.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+                <p>
+                  <code>&lt;a&gt;</code> elements cannot be used as attribution
+                  triggers, only sources.
+                </p>
+              </dd>
+              <dt id="download">
+                <a href="#download"><code>download</code></a>
+              </dt>
+              <dd>
+                <p>
+                  Causes the browser to treat the linked URL as a download. Can
+                  be used with or without a <code>filename</code> value:
+                </p>
+                <ul>
+                  <li>
+                    <p>
+                      Without a value, the browser will suggest a
+                      filename/extension, generated from various sources:
+                    </p>
+                    <ul>
+                      <li>
+                        The
+                        <a
+                          href="/en-US/docs/Web/HTTP/Headers/Content-Disposition"
+                          ><code>Content-Disposition</code></a
+                        >
+                        HTTP header
+                      </li>
+                      <li>
+                        The final segment in the URL
+                        <a href="/en-US/docs/Web/API/URL/pathname">path</a>
+                      </li>
+                      <li>
+                        The
+                        <a href="/en-US/docs/Glossary/MIME_type">media type</a>
+                        (from the
+                        <a href="/en-US/docs/Web/HTTP/Headers/Content-Type"
+                          ><code>Content-Type</code></a
+                        >
+                        header, the start of a
+                        <a href="/en-US/docs/Web/URI/Reference/Schemes/data"
+                          ><code>data:</code> URL</a
+                        >, or
+                        <a href="/en-US/docs/Web/API/Blob/type"
+                          ><code>Blob.type</code></a
+                        >
+                        for a
+                        <a href="/en-US/docs/Web/API/URL/createObjectURL_static"
+                          ><code>blob:</code> URL</a
+                        >)
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <p>
+                      <code>filename</code>: defining a value suggests it as the
+                      filename. <code>/</code> and <code>\</code> characters are
+                      converted to underscores (<code>_</code>). Filesystems may
+                      forbid other characters in filenames, so browsers will
+                      adjust the suggested name if necessary.
+                    </p>
+                  </li>
+                </ul>
+                <div class="notecard note">
+                  <p><strong>Note:</strong></p>
+                  <ul>
+                    <li>
+                      <p>
+                        <code>download</code> only works for
+                        <a href="/en-US/docs/Web/Security/Same-origin_policy"
+                          >same-origin URLs</a
+                        >, or the <code>blob:</code> and
+                        <code>data:</code> schemes.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        How browsers treat downloads varies by browser, user
+                        settings, and other factors. The user may be prompted
+                        before a download starts, or the file may be saved
+                        automatically, or it may open automatically, either in
+                        an external application or in the browser itself.
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        If the <code>Content-Disposition</code> header has
+                        different information from the
+                        <code>download</code> attribute, resulting behavior may
+                        differ:
+                      </p>
+                      <ul>
+                        <li>
+                          If the header specifies a <code>filename</code>, it
+                          takes priority over a filename specified in the
+                          <code>download</code> attribute.
+                        </li>
+                        <li>
+                          If the header specifies a disposition of
+                          <code>inline</code>, Chrome and Firefox prioritize the
+                          attribute and treat it as a download. Old Firefox
+                          versions (before 82) prioritize the header and will
+                          display the content inline.
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </dd>
+              <dt id="href">
+                <a href="#href"><code>href</code></a>
+              </dt>
+              <dd>
+                <p>
+                  The URL that the hyperlink points to. Links are not restricted
+                  to HTTP-based URLs — they can use any URL scheme supported by
+                  browsers:
+                </p>
+                <ul>
+                  <li>Telephone numbers with <code>tel:</code> URLs</li>
+                  <li>Email addresses with <code>mailto:</code> URLs</li>
+                  <li>SMS text messages with <code>sms:</code> URLs</li>
+                  <li>
+                    Executable code with
+                    <a href="/en-US/docs/Web/URI/Reference/Schemes/javascript"
+                      ><code>javascript:</code> URLs</a
+                    >
+                  </li>
+                  <li>
+                    While web browsers may not support other URL schemes,
+                    websites can with
+                    <a
+                      href="/en-US/docs/Web/API/Navigator/registerProtocolHandler"
+                      ><code>registerProtocolHandler()</code></a
+                    >
+                  </li>
+                </ul>
+                <p>
+                  Moreover other URL features can locate specific parts of the
+                  resource, including:
+                </p>
+                <ul>
+                  <li>Sections of a page with document fragments</li>
+                  <li>
+                    Specific text portions with
+                    <a
+                      href="/en-US/docs/Web/URI/Reference/Fragment/Text_fragments"
+                      >text fragments</a
+                    >
+                  </li>
+                  <li>Pieces of media files with media fragments</li>
+                </ul>
+              </dd>
+              <dt id="hreflang">
+                <a href="#hreflang"><code>hreflang</code></a>
+              </dt>
+              <dd>
+                <p>
+                  Hints at the human language of the linked URL. No built-in
+                  functionality. Allowed values are the same as
+                  <a href="/en-US/docs/Web/HTML/Global_attributes/lang"
+                    >the global <code>lang</code> attribute</a
+                  >.
+                </p>
+              </dd>
+              <dt id="ping">
+                <a href="#ping"><code>ping</code></a>
+              </dt>
+              <dd>
+                <p>
+                  A space-separated list of URLs. When the link is followed, the
+                  browser will send
+                  <a href="/en-US/docs/Web/HTTP/Methods/POST"
+                    ><code>POST</code></a
+                  >
+                  requests with the body <code>PING</code> to the URLs.
+                  Typically for tracking.
+                </p>
+              </dd>
+              <dt id="referrerpolicy">
+                <a href="#referrerpolicy"><code>referrerpolicy</code></a>
+              </dt>
+              <dd>
+                <p>
+                  How much of the
+                  <a href="/en-US/docs/Web/HTTP/Headers/Referer">referrer</a> to
+                  send when following the link.
+                </p>
+                <ul>
+                  <li>
+                    <code>no-referrer</code>: The
+                    <a href="/en-US/docs/Web/HTTP/Headers/Referer"
+                      ><code>Referer</code></a
+                    >
+                    header will not be sent.
+                  </li>
+                  <li>
+                    <code>no-referrer-when-downgrade</code>: The
+                    <a href="/en-US/docs/Web/HTTP/Headers/Referer"
+                      ><code>Referer</code></a
+                    >
+                    header will not be sent to
+                    <a href="/en-US/docs/Glossary/Origin">origin</a>s without
+                    <a href="/en-US/docs/Glossary/TLS">TLS</a> (<a
+                      href="/en-US/docs/Glossary/HTTPS"
+                      >HTTPS</a
+                    >).
+                  </li>
+                  <li>
+                    <code>origin</code>: The sent referrer will be limited to
+                    the origin of the referring page: its
+                    <a
+                      href="/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"
+                      >scheme</a
+                    >, <a href="/en-US/docs/Glossary/Host">host</a>, and
+                    <a href="/en-US/docs/Glossary/Port">port</a>.
+                  </li>
+                  <li>
+                    <code>origin-when-cross-origin</code>: The referrer sent to
+                    other origins will be limited to the scheme, the host, and
+                    the port. Navigations on the same origin will still include
+                    the path.
+                  </li>
+                  <li>
+                    <code>same-origin</code>: A referrer will be sent for
+                    <a href="/en-US/docs/Glossary/Same-origin_policy"
+                      >same origin</a
+                    >, but cross-origin requests will contain no referrer
+                    information.
+                  </li>
+                  <li>
+                    <code>strict-origin</code>: Only send the origin of the
+                    document as the referrer when the protocol security level
+                    stays the same (HTTPS→HTTPS), but don't send it to a less
+                    secure destination (HTTPS→HTTP).
+                  </li>
+                  <li>
+                    <code>strict-origin-when-cross-origin</code> (default): Send
+                    a full URL when performing a same-origin request, only send
+                    the origin when the protocol security level stays the same
+                    (HTTPS→HTTPS), and send no header to a less secure
+                    destination (HTTPS→HTTP).
+                  </li>
+                  <li>
+                    <code>unsafe-url</code>: The referrer will include the
+                    origin <em>and</em> the path (but not the
+                    <a href="/en-US/docs/Web/API/HTMLAnchorElement/hash"
+                      >fragment</a
+                    >,
+                    <a href="/en-US/docs/Web/API/HTMLAnchorElement/password"
+                      >password</a
+                    >, or
+                    <a href="/en-US/docs/Web/API/HTMLAnchorElement/username"
+                      >username</a
+                    >). <strong>This value is unsafe</strong>, because it leaks
+                    origins and paths from TLS-protected resources to insecure
+                    origins.
+                  </li>
+                </ul>
+              </dd>
+              <dt id="rel">
+                <a href="/en-US/docs/Web/HTML/Attributes/rel"
+                  ><code>rel</code></a
+                >
+              </dt>
+              <dd>
+                <p>
+                  The relationship of the linked URL as space-separated link
+                  types.
+                </p>
+              </dd>
+              <dt id="target">
+                <a href="#target"><code>target</code></a>
+              </dt>
+              <dd>
+                <p>
+                  Where to display the linked URL, as the name for a
+                  <em>browsing context</em> (a tab, window, or
+                  <a href="/en-US/docs/Web/HTML/Element/iframe"
+                    ><code>&lt;iframe&gt;</code></a
+                  >). The following keywords have special meanings for where to
+                  load the URL:
+                </p>
+                <ul>
+                  <li>
+                    <code>_self</code>: The current browsing context. (Default)
+                  </li>
+                  <li>
+                    <code>_blank</code>: Usually a new tab, but users can
+                    configure browsers to open a new window instead.
+                  </li>
+                  <li>
+                    <code>_parent</code>: The parent browsing context of the
+                    current one. If no parent, behaves as <code>_self</code>.
+                  </li>
+                  <li>
+                    <code>_top</code>: The topmost browsing context. To be
+                    specific, this means the "highest" context that's an
+                    ancestor of the current one. If no ancestors, behaves as
+                    <code>_self</code>.
+                  </li>
+                  <li>
+                    <code>_unfencedTop</code>: Allows embedded
+                    <a href="/en-US/docs/Web/API/Fenced_frame_API"
+                      >fenced frames</a
+                    >
+                    to navigate the top-level frame (i.e. traversing beyond the
+                    root of the fenced frame, unlike other reserved
+                    destinations). Note that the navigation will still succeed
+                    if this is used outside of a fenced frame context, but it
+                    will not act like a reserved keyword.
+                  </li>
+                </ul>
+                <div class="notecard note">
+                  <p>
+                    <strong>Note:</strong> Setting
+                    <code>target="_blank"</code> on
+                    <code>&lt;a&gt;</code> elements implicitly provides the same
+                    <code>rel</code> behavior as setting
+                    <a href="/en-US/docs/Web/HTML/Attributes/rel/noopener"
+                      ><code>rel="noopener"</code></a
+                    >
+                    which does not set <code>window.opener</code>.
+                  </p>
+                </div>
+              </dd>
+              <dt id="type">
+                <a href="#type"><code>type</code></a>
+              </dt>
+              <dd>
+                <p>
+                  Hints at the linked URL's format with a
+                  <a href="/en-US/docs/Glossary/MIME_type">MIME type</a>. No
+                  built-in functionality.
+                </p>
+              </dd>
+            </dl>
+          </td>
         </tr>
         <tr>
           <td><a href="tag_abbr.asp">&lt;abbr&gt;</a></td>
           <td>Defines an abbreviation or an acronym</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_acronym.asp" class="notsupported">&lt;acronym&gt;</a>
+            <a class="notsupported" href="tag_acronym.asp">&lt;acronym&gt;</a>
           </td>
           <td>
             <span class="deprecated"
@@ -57,16 +546,18 @@
               <a href="tag_abbr.asp">&lt;abbr&gt;</a> instead.<br /></span
             >Defines an acronym
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_address.asp">&lt;address&gt;</a></td>
           <td>
             Defines contact information for the author/owner of a document
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_applet.asp" class="notsupported">&lt;applet&gt;</a>
+            <a class="notsupported" href="tag_applet.asp">&lt;applet&gt;</a>
           </td>
           <td>
             <span class="deprecated"
@@ -75,38 +566,45 @@
               <a href="tag_object.asp">&lt;object&gt;</a> instead.<br /></span
             >Defines an embedded applet
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_area.asp">&lt;area&gt;</a></td>
           <td>Defines an area inside an image map</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="html5badge">
             <a href="tag_article.asp">&lt;article&gt;</a>
           </td>
           <td>Defines an article</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="html5badge"><a href="tag_aside.asp">&lt;aside&gt;</a></td>
           <td>Defines content aside from the page content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="html5badge"><a href="tag_audio.asp">&lt;audio&gt;</a></td>
           <td>Defines embedded sound content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_b.asp">&lt;b&gt;</a></td>
           <td>Defines bold text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_base.asp">&lt;base&gt;</a></td>
           <td>
             Specifies the base URL/target for all relative URLs in a document
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_basefont.asp" class="notsupported">&lt;basefont&gt;</a>
+            <a class="notsupported" href="tag_basefont.asp">&lt;basefont&gt;</a>
           </td>
           <td>
             <span class="deprecated"
@@ -114,6 +612,7 @@
             >Specifies a default color, size, and font for all text in a
             document
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_bdi.asp">&lt;bdi&gt;</a></td>
@@ -121,34 +620,41 @@
             Isolates a part of text that might be formatted in a different
             direction from other text outside it
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_bdo.asp">&lt;bdo&gt;</a></td>
           <td>Overrides the current text direction</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
-          <td><a href="tag_big.asp" class="notsupported">&lt;big&gt;</a></td>
+          <td><a class="notsupported" href="tag_big.asp">&lt;big&gt;</a></td>
           <td>
             <span class="deprecated"
               >Not supported in HTML5. Use CSS instead.<br /></span
             >Defines big text
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_blockquote.asp">&lt;blockquote&gt;</a></td>
           <td>Defines a section that is quoted from another source</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_body.asp">&lt;body&gt;</a></td>
           <td>Defines the document's body</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_br.asp">&lt;br&gt;</a></td>
           <td>Defines a single line break</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_button.asp">&lt;button&gt;</a></td>
           <td>Defines a clickable button</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_canvas.asp">&lt;canvas&gt;</a></td>
@@ -156,28 +662,33 @@
             Used to draw graphics, on the fly, via scripting (usually
             JavaScript)
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_caption.asp">&lt;caption&gt;</a></td>
           <td>Defines a table caption</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_center.asp" class="notsupported">&lt;center&gt;</a>
+            <a class="notsupported" href="tag_center.asp">&lt;center&gt;</a>
           </td>
           <td>
             <span class="deprecated"
               >Not supported in HTML5. Use CSS instead.<br /></span
             >Defines centered text
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_cite.asp">&lt;cite&gt;</a></td>
           <td>Defines the title of a work</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_code.asp">&lt;code&gt;</a></td>
           <td>Defines a piece of computer code</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_col.asp">&lt;col&gt;</a></td>
@@ -185,181 +696,219 @@
             Specifies column properties for each column within a
             &lt;colgroup&gt; element&nbsp;
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_colgroup.asp">&lt;colgroup&gt;</a></td>
           <td>
             Specifies a group of one or more columns in a table for formatting
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_data.asp">&lt;data&gt;</a></td>
           <td>Adds a machine-readable translation of a given content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_datalist.asp">&lt;datalist&gt;</a></td>
           <td>Specifies a list of pre-defined options for input controls</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_dd.asp">&lt;dd&gt;</a></td>
           <td>Defines a description/value of a term in a description list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_del.asp">&lt;del&gt;</a></td>
           <td>Defines text that has been deleted from a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_details.asp">&lt;details&gt;</a></td>
           <td>Defines additional details that the user can view or hide</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_dfn.asp">&lt;dfn&gt;</a></td>
           <td>
             Specifies a term that is going to be defined within the content
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_dialog.asp">&lt;dialog&gt;</a></td>
           <td>Defines a dialog box or window</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
-          <td><a href="tag_dir.asp" class="notsupported">&lt;dir&gt;</a></td>
+          <td><a class="notsupported" href="tag_dir.asp">&lt;dir&gt;</a></td>
           <td>
             <span class="deprecated"
               >Not supported in HTML5. Use
               <a href="tag_ul.asp">&lt;ul&gt;</a> instead.<br /></span
             >Defines a directory list
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_div.asp">&lt;div&gt;</a></td>
           <td>Defines a section in a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_dl.asp">&lt;dl&gt;</a></td>
           <td>Defines a description list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_dt.asp">&lt;dt&gt;</a></td>
           <td>Defines a term/name in a description list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_em.asp">&lt;em&gt;</a></td>
           <td>Defines emphasized text&nbsp;</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_embed.asp">&lt;embed&gt;</a></td>
           <td>Defines a container for an external application</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_fieldset.asp">&lt;fieldset&gt;</a></td>
           <td>Groups related elements in a form</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="html5badge">
             <a href="tag_figcaption.asp">&lt;figcaption&gt;</a>
           </td>
           <td>Defines a caption for a &lt;figure&gt; element</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td class="html5badge">
             <a href="tag_figure.asp">&lt;figure&gt;</a>
           </td>
           <td>Specifies self-contained content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
-          <td><a href="tag_font.asp" class="notsupported">&lt;font&gt;</a></td>
+          <td><a class="notsupported" href="tag_font.asp">&lt;font&gt;</a></td>
           <td>
             <span class="deprecated"
               >Not supported in HTML5. Use CSS instead.<br /></span
             >Defines font, color, and size for text
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_footer.asp">&lt;footer&gt;</a></td>
           <td>Defines a footer for a document or section</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_form.asp">&lt;form&gt;</a></td>
           <td>Defines an HTML form for user input</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_frame.asp" class="notsupported">&lt;frame&gt;</a>
+            <a class="notsupported" href="tag_frame.asp">&lt;frame&gt;</a>
           </td>
           <td>
             <span class="deprecated">Not supported in HTML5.<br /></span>Defines
             a window (a frame) in a frameset
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_frameset.asp" class="notsupported">&lt;frameset&gt;</a>
+            <a class="notsupported" href="tag_frameset.asp">&lt;frameset&gt;</a>
           </td>
           <td>
             <span class="deprecated">Not supported in HTML5.<br /></span>Defines
             a set of frames
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_hn.asp">&lt;h1&gt; to &lt;h6&gt;</a></td>
           <td>Defines HTML headings</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_head.asp">&lt;head&gt;</a></td>
           <td>Contains metadata/information for the document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_header.asp">&lt;header&gt;</a></td>
           <td>Defines a header for a document or section</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_hgroup.asp">&lt;hgroup&gt;</a></td>
           <td>Defines a header and related content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_hr.asp">&lt;hr&gt;</a></td>
           <td>Defines a thematic change in the content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_html.asp">&lt;html&gt;</a></td>
           <td>Defines the root of an HTML document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_i.asp">&lt;i&gt;</a></td>
           <td>Defines a part of text in an alternate voice or mood</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_iframe.asp">&lt;iframe&gt;</a></td>
           <td>Defines an inline frame</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_img.asp">&lt;img&gt;</a></td>
           <td>Defines an image</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_input.asp">&lt;input&gt;</a></td>
           <td>Defines an input control</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_ins.asp">&lt;ins&gt;</a></td>
           <td>Defines a text that has been inserted into a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_kbd.asp">&lt;kbd&gt;</a></td>
           <td>Defines keyboard input</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_label.asp">&lt;label&gt;</a></td>
           <td>Defines a label&nbsp;for an &lt;input&gt; element</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_legend.asp">&lt;legend&gt;</a></td>
           <td>Defines a caption for a &lt;fieldset&gt; element</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_li.asp">&lt;li&gt;</a></td>
           <td>Defines a list item</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_link.asp">&lt;link&gt;</a></td>
@@ -367,43 +916,52 @@
             Defines the relationship between a document and an external resource
             (most used to link to style sheets)
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_main.asp">&lt;main&gt;</a></td>
           <td>Specifies the main content of a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_map.asp">&lt;map&gt;</a></td>
           <td>Defines an image map</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_mark.asp">&lt;mark&gt;</a></td>
           <td>Defines marked/highlighted text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_menu.asp">&lt;menu&gt;</a></td>
           <td>Defines an unordered list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_meta.asp">&lt;meta&gt;</a></td>
           <td>Defines metadata about an HTML document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_meter.asp">&lt;meter&gt;</a></td>
           <td>Defines a scalar measurement within a known range (a gauge)</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_nav.asp">&lt;nav&gt;</a></td>
           <td>Defines navigation links</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_noframes.asp" class="notsupported">&lt;noframes&gt;</a>
+            <a class="notsupported" href="tag_noframes.asp">&lt;noframes&gt;</a>
           </td>
           <td>
             <span class="deprecated">Not supported in HTML5.<br /></span>Defines
             an alternate content for users that do not support frames
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_noscript.asp">&lt;noscript&gt;</a></td>
@@ -411,50 +969,62 @@
             Defines an alternate content for users that do not support
             client-side scripts
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_object.asp">&lt;object&gt;</a></td>
           <td>Defines a container for an external application</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_ol.asp">&lt;ol&gt;</a></td>
           <td>Defines an ordered list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_optgroup.asp">&lt;optgroup&gt;</a></td>
           <td>Defines a group of related options in a drop-down list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_option.asp">&lt;option&gt;</a></td>
           <td>Defines an option in a drop-down list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_output.asp">&lt;output&gt;</a></td>
           <td>Defines the result of a calculation</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_p.asp">&lt;p&gt;</a></td>
           <td>Defines a paragraph</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_param.asp">&lt;param&gt;</a></td>
           <td>Defines a parameter for an object</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_picture.asp">&lt;picture&gt;</a></td>
           <td>Defines a container for multiple image resources</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_pre.asp">&lt;pre&gt;</a></td>
           <td>Defines preformatted text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_progress.asp">&lt;progress&gt;</a></td>
           <td>Represents the progress of a task</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_q.asp">&lt;q&gt;</a></td>
           <td>Defines a short quotation</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_rp.asp">&lt;rp&gt;</a></td>
@@ -462,6 +1032,7 @@
             Defines what to show in browsers that do not support ruby
             annotations
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_rt.asp">&lt;rt&gt;</a></td>
@@ -469,38 +1040,47 @@
             Defines an explanation/pronunciation of characters (for East Asian
             typography)
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_ruby.asp">&lt;ruby&gt;</a></td>
           <td>Defines a ruby annotation (for East Asian typography)</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_s.asp">&lt;s&gt;</a></td>
           <td>Defines text that is no longer correct</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_samp.asp">&lt;samp&gt;</a></td>
           <td>Defines sample output from a computer program</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_script.asp">&lt;script&gt;</a></td>
           <td>Defines a client-side script</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_search.asp">&lt;search&gt;</a></td>
           <td>Defines a search section</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_section.asp">&lt;section&gt;</a></td>
           <td>Defines a section in a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_select.asp">&lt;select&gt;</a></td>
           <td>Defines a drop-down list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_small.asp">&lt;small&gt;</a></td>
           <td>Defines smaller text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_source.asp">&lt;source&gt;</a></td>
@@ -508,14 +1088,16 @@
             Defines multiple media resources for media elements (&lt;video&gt;
             and &lt;audio&gt;)
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_span.asp">&lt;span&gt;</a></td>
           <td>Defines a section in a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td>
-            <a href="tag_strike.asp" class="notsupported">&lt;strike&gt;</a>
+            <a class="notsupported" href="tag_strike.asp">&lt;strike&gt;</a>
           </td>
           <td>
             <span class="deprecated"
@@ -524,42 +1106,52 @@
               <a href="tag_s.asp">&lt;s&gt;</a> instead.<br /></span
             >Defines strikethrough text
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_strong.asp">&lt;strong&gt;</a></td>
           <td>Defines important text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_style.asp">&lt;style&gt;</a></td>
           <td>Defines style information for a document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_sub.asp">&lt;sub&gt;</a></td>
           <td>Defines subscripted text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_summary.asp">&lt;summary&gt;</a></td>
           <td>Defines a visible heading for a &lt;details&gt; element</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_sup.asp">&lt;sup&gt;</a></td>
           <td>Defines superscripted text</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_svg.asp">&lt;svg&gt;</a></td>
           <td>Defines a container for SVG graphics</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_table.asp">&lt;table&gt;</a></td>
           <td>Defines a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_tbody.asp">&lt;tbody&gt;</a></td>
           <td>Groups the body content in a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_td.asp">&lt;td&gt;</a></td>
           <td>Defines a cell in a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_template.asp">&lt;template&gt;</a></td>
@@ -567,34 +1159,42 @@
             Defines a container for content that should be hidden when the page
             loads
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_textarea.asp">&lt;textarea&gt;</a></td>
           <td>Defines a multiline input control (text area)</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_tfoot.asp">&lt;tfoot&gt;</a></td>
           <td>Groups the footer content in a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_th.asp">&lt;th&gt;</a></td>
           <td>Defines a header cell in a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_thead.asp">&lt;thead&gt;</a></td>
           <td>Groups the header content in a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_time.asp">&lt;time&gt;</a></td>
           <td>Defines a specific time (or datetime)</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_title.asp">&lt;title&gt;</a></td>
           <td>Defines a title for the document</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_tr.asp">&lt;tr&gt;</a></td>
           <td>Defines a row in a table</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_track.asp">&lt;track&gt;</a></td>
@@ -602,6 +1202,7 @@
             Defines text tracks for media elements (&lt;video&gt; and
             &lt;audio&gt;)
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a class="notsupported" href="tag_tt.asp">&lt;tt&gt;</a></td>
@@ -610,6 +1211,7 @@
               >Not supported in HTML5. Use CSS instead.<br /></span
             >Defines teletype text
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_u.asp">&lt;u&gt;</a></td>
@@ -617,24 +1219,30 @@
             Defines some text that is unarticulated and styled differently from
             normal text
           </td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_ul.asp">&lt;ul&gt;</a></td>
           <td>Defines an unordered list</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_var.asp">&lt;var&gt;</a></td>
           <td>Defines a variable</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_video.asp">&lt;video&gt;</a></td>
           <td>Defines embedded video content</td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td><a href="tag_wbr.asp">&lt;wbr&gt;</a></td>
           <td>Defines a possible line-break</td>
+          <td>&nbsp;</td>
         </tr>
       </tbody>
     </table>
+    <p>&nbsp;</p>
   </body>
 </html>
