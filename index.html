@@ -2363,7 +2363,80 @@
         <tr>
           <td><a href="tag_script.asp">&lt;script&gt;</a></td>
           <td>Defines a client-side script</td>
-          <td>&nbsp;</td>
+          <td>
+            <table class="ws-table-all notranslate">
+              <tbody>
+                <tr>
+                  <th style="width: 15%">Attribute</th>
+                  <th style="width: 35%">Value</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td><a href="att_script_async.asp">async</a></td>
+                  <td>async</td>
+                  <td>
+                    Specifies that the script is downloaded in parallel to
+                    parsing the page, and executed as soon as it is available
+                    (before parsing completes) (only for external scripts)
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="att_script_crossorigin.asp">crossorigin</a></td>
+                  <td>anonymous<br />use-credentials</td>
+                  <td>Sets the mode of the request to an HTTP CORS Request</td>
+                </tr>
+                <tr>
+                  <td><a href="att_script_defer.asp">defer</a></td>
+                  <td>defer</td>
+                  <td>
+                    Specifies that the script is downloaded in parallel to
+                    parsing the page, and executed after the page has finished
+                    parsing (only for external scripts)
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="att_script_integrity.asp">integrity</a></td>
+                  <td><em>filehash</em></td>
+                  <td>
+                    Allows a browser to check the fetched script to ensure that
+                    the code is never loaded if the source has been manipulated
+                  </td>
+                </tr>
+                <tr>
+                  <td>nomodule</td>
+                  <td>True<br />False</td>
+                  <td>
+                    Specifies that the script should not be executed in browsers
+                    supporting <a href="/js/js_es6.asp">ES2015</a> modules
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a href="att_script_referrepolicy.asp">referrerpolicy</a>
+                  </td>
+                  <td>
+                    no-referrer<br />no-referrer-when-downgrade<br />origin<br />
+                    origin-when-cross-origin<br />same-origin<br />strict-origin<br />
+                    strict-origin-when-cross-origin<br />unsafe-url
+                  </td>
+                  <td>
+                    Specifies which referrer information to send when fetching a
+                    script
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="att_script_src.asp">src</a></td>
+                  <td><i>URL</i></td>
+                  <td>Specifies the URL of an external script file</td>
+                </tr>
+                <tr>
+                  <td><a href="att_script_type.asp">type</a></td>
+                  <td><i>scripttype</i></td>
+                  <td>Specifies the media type of the script</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
         <tr>
           <td><a href="tag_search.asp">&lt;search&gt;</a></td>
