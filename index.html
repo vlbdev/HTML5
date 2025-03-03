@@ -2890,7 +2890,55 @@
             Defines text tracks for media elements (&lt;video&gt; and
             &lt;audio&gt;)
           </td>
-          <td>&nbsp;</td>
+          <td>
+            <table class="ws-table-all notranslate">
+              <tbody>
+                <tr>
+                  <th style="width: 20%">Attribute</th>
+                  <th style="width: 20%">Value</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td><a href="att_track_default.asp">default</a></td>
+                  <td>default</td>
+                  <td>
+                    Specifies that the track is to be enabled if the user's
+                    preferences do not indicate that another track would be more
+                    appropriate
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="att_track_kind.asp">kind</a></td>
+                  <td>
+                    captions<br />
+                    chapters<br />
+                    descriptions<br />
+                    metadata<br />
+                    subtitles
+                  </td>
+                  <td>Specifies the kind of text track</td>
+                </tr>
+                <tr>
+                  <td><a href="att_track_label.asp">label</a></td>
+                  <td><em>text</em></td>
+                  <td>Specifies the title of the text track</td>
+                </tr>
+                <tr>
+                  <td><a href="att_track_src.asp">src</a></td>
+                  <td><em>URL</em></td>
+                  <td>Required. Specifies the URL of the track file</td>
+                </tr>
+                <tr>
+                  <td><a href="att_track_srclang.asp">srclang</a></td>
+                  <td><i>language_code</i></td>
+                  <td>
+                    Specifies the language of the track text data (required if
+                    kind="subtitles")
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
         </tr>
         <tr>
           <td><a class="notsupported" href="tag_tt.asp">&lt;tt&gt;</a></td>
